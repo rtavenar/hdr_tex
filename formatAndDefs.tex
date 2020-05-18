@@ -1,0 +1,382 @@
+% !TeX root = ./hdr.tex
+
+
+\usepackage{amsmath,amssymb}             % AMS Math
+%\usepackage{oz}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{array}
+%
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{longtable}
+\usepackage{etoolbox}
+%\usepackage[frenchb]{babel}
+%\usepackage[]{subfig}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{nameref}
+%\usepackage{breakcites}
+\usepackage{cite}
+\usepackage{todonotes}
+\usepackage[]{amsthm}
+
+\definecolor{ForestGreen}{rgb}{0.0, 0.27, 0.13}
+\usepackage{listings}
+% Definitions of handy macros can go here
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+%    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    keywordstyle=\color{red!70!black},
+    commentstyle=\color{ForestGreen!80!black}
+}
+\lstset{style=mystyle,language=Python}
+
+\usepackage[ruled]{algorithm2e}
+
+
+\newcommand{\addref}{\todo[color=red!40]{Référence!}}
+\newcommand{\addfig}{\todo[color=red!40]{Figure!} }
+\newcommand{\todoi}[1]{\todo[inline]{#1}}
+%\newcommand{\to}{\todo[color=red!40]{Add reference.}
+% \missingfigure pour faire des figures
+\setlength{\marginparwidth}{2cm}
+
+%\usepackage{caption}
+% Different font in captions
+\newcommand{\captionfonts}{\small}
+
+\makeatletter  % Allow the use of @ in command names
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{{\captionfonts #1: #2}}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\captionfonts #1: #2\par}
+  \else
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+\makeatother   % Cancel the effect of \makeatletter
+
+\usepackage{tikz}
+%\usepackage{tkz-graph}
+\usetikzlibrary{arrows,automata}
+
+%\usepackage[T1]{fontenc}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includefoot,includehead,headheight=13.6pt]{geometry}
+\renewcommand{\baselinestretch}{1.05}
+
+% Table of contents for each chapter
+
+
+
+\newcommand{\refname}{{\sffamily References}}
+\usepackage{aecompl}
+
+% Glossary / list of abbreviations
+
+\usepackage[intoc]{nomencl}
+\renewcommand{\nomname}{Notations and Acronyms}
+\nomlabelwidth=25mm
+%\renewcommand{\nomentryend}{\dotfill#1}}
+%\renewcommand{\pagedeclaration}[1]{\unskip\dotfill}
+
+%\renewcommand{\nompageref}[2]{\dotfill #1\endgroup}
+
+ \makenomenclature
+ \renewcommand{\nomgroup}[1]{%
+\ifthenelse{\equal{#1}{N}}{\item[\Large\sffamily\textbf{Notations}]}{%
+\ifthenelse{\equal{#1}{X}}{\item[\Large\sffamily\textbf{Acronyms}]}{}}}
+
+\usepackage{makeidx}
+ \makeindex
+
+% \usepackage[chapter]{algorithm}
+% \usepackage{algorithmic}
+
+\makenomenclature
+
+% My pdf code
+
+
+\usepackage{ifpdf}
+
+\ifpdf
+  \usepackage{graphicx}
+  \DeclareGraphicsExtensions{.jpg,.pdf,.png}
+  \usepackage[pagebackref,hyperindex=true]{hyperref}
+\else
+  \usepackage{graphicx}
+  \DeclareGraphicsExtensions{.ps,.eps}
+  \usepackage[dvipdfm,pagebackref,hyperindex=true]{hyperref}
+\fi
+
+\graphicspath{{.}{imgs/}}
+
+%nicer backref links
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{%
+\ifcase #1 %
+(Not cited)%
+\or
+(Cited on page~#2.)%
+\else
+(Cited on pages~#2.)%
+\fi}
+\renewcommand*{\backrefsep}{, }
+\renewcommand*{\backreftwosep}{ and~}
+\renewcommand*{\backreflastsep}{ and~}
+
+% Links in pdf
+\usepackage{color}
+\definecolor{linkcol}{rgb}{0,0,0.4}
+\definecolor{citecol}{rgb}{0.5,0,0}
+
+% Change this to change the informations included in the pdf file
+
+\hypersetup
+{
+bookmarksopen=true,
+pdftitle=\mytitle,
+pdfauthor=\myauthor, %auteur du document
+pdfsubject="", %sujet du document
+%pdftoolbar=false, %barre d'outils non visible
+pdfmenubar=true, %barre de menu visible
+pdfhighlight=/O, %effet d'un clic sur un lien hypertexte
+colorlinks=true, %couleurs sur les liens hypertextes
+pdfpagemode=None, %aucun mode de page
+pdfpagelayout=SinglePage, %ouverture en simple page
+pdffitwindow=true, %pages ouvertes entierement dans toute la fenetre
+linkcolor=linkcol, %couleur des liens hypertextes internes
+citecolor=citecol, %couleur des liens pour les citations
+urlcolor=linkcol %couleur des liens pour les url
+}
+
+% definitions.
+% -------------------
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+% Some useful commands and shortcut for maths:  partial derivative and stuff
+
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\def\abs{\operatorname{abs}}
+\def\argmax{\operatornamewithlimits{arg\,max}}
+\def\argmin{\operatornamewithlimits{arg\,min}}
+\def\diag{\operatorname{Diag}}
+\newcommand{\eqRef}[1]{(\ref{#1})}
+\newcommand{\lp}[1]{$\ell_{#1}$}
+
+\usepackage{multicol}
+\usepackage{rotating}                    % Sideways of figures & tables
+%\usepackage{bibunits}
+%\usepackage[sectionbib]{chapterbib}          % Cross-reference package (Natural BiB)
+%\usepackage{natbib}                  % Put References at the end of each chapter
+                                         % Do not put 'sectionbib' option here.
+                                         % Sectionbib option in 'natbib' will do.
+\usepackage{fancyhdr}                    % Fancy Header and Footer
+
+ %\usepackage{txfonts}                     % Public Times New Roman text & math font
+
+%%% Fancy Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fancy Header Style Options
+
+\pagestyle{fancy}                       % Sets fancy header and footer
+\fancyfoot{}                            % Delete current footer settings
+
+% \renewcommand{\chaptermark}[1]{         % Lower Case Chapter marker style
+%  \markboth{\chaptername\ \thechapter.\ #1}}{}} %
+
+% \renewcommand{\sectionmark}[1]{         % Lower case Section marker style
+%  \markright{\thesection.\ #1}}         %
+
+\fancyhead[LE,RO]{\sffamily\bfseries\thepage}    % Page number (boldface) in left on even
+% pages and right on odd pages
+\fancyhead[RE]{\sffamily\bfseries\nouppercase{\leftmark}}      % Chapter in the right on even pages
+\fancyhead[LO]{\sffamily\bfseries\nouppercase{\rightmark}}     % Section in the left on odd pages
+
+\let\headruleORIG\headrule
+\renewcommand{\headrule}{\color{black} \headruleORIG}
+\renewcommand{\headrulewidth}{1.0pt}
+\usepackage{colortbl}
+\arrayrulecolor{black}
+
+\fancypagestyle{plain}{
+  \fancyhead{}
+  \fancyfoot{}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+
+% \rfoot{\setlength{\unitlength}{1mm}
+% \begin{picture}(-0,0)
+% \put(-5,-15){\includegraphics[height=2cm]{imgs/animation/image\thepage.png}}
+% \end{picture}}
+
+
+%%% Clear Header %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Clear Header Style on the Last Empty Odd pages
+\makeatletter
+
+\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
+  \hbox{}%
+  \thispagestyle{empty}%              % Empty header styles
+  \newpage%
+  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+\makeatother
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Prints your review date and 'Draft Version' (From Josullvn, CS, CMU)
+\newcommand{\reviewtimetoday}[2]{\special{!userdict begin
+    /bop-hook{gsave 20 710 translate 45 rotate 0.8 setgray
+      /Times-Roman findfont 12 scalefont setfont 0 0   moveto (#1) show
+      0 -12 moveto (#2) show grestore}def end}}
+% You can turn on or off this option.
+% \reviewtimetoday{\today}{Draft Version}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{maxime}[1]
+{
+\vspace*{0cm}
+\hfill
+\begin{minipage}{0.5\textwidth}%
+%\rule[0.5ex]{\textwidth}{0.1mm}\\%
+\hrulefill $\:$ {\bf #1}\\
+%\vspace*{-0.25cm}
+\it
+}%
+{%
+
+\hrulefill
+\vspace*{0.5cm}%
+\end{minipage}
+}
+
+
+\usepackage{multirow}
+%\usepackage{slashbox}
+%\usepackage{letterlike}
+\newenvironment{bulletList}%
+{ \begin{list}%
+	{$\bullet$}%
+	{\setlength{\labelwidth}{25pt}%
+	 \setlength{\leftmargin}{30pt}%
+	 \setlength{\itemsep}{\parsep}}}%
+{ \end{list} }
+
+\newtheorem{definition}{Definition}
+\newtheorem*{hypotheses}{Hypothèses}
+\renewcommand{\epsilon}{\varepsilon}
+\newtheorem{proposition}{Proposition}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+%\newtheorem{proposition}{Proposition}
+% centered page environment
+
+\newenvironment{vcenterpage}
+{\newpage\vspace*{\fill}\thispagestyle{empty}\renewcommand{\headrulewidth}{0pt}}
+{\vspace*{\fill}}
+
+
+
+\newenvironment{rubrique}[2][\linewidth] {
+%\styleRub{#2}
+\setlength{\lenB}{#1}
+\setlength{\lenC}{\linewidth}
+\addtolength{\lenC}{-\lenA}
+\addtolength{\lenC}{-\lenB}
+\addtolength{\lenC}{-\parindent}
+\addtolength{\lenC}{-9pt}\vspace{-1mm}
+\setlength\itemsep{-1mm}
+% %\vspace{- \setlength\itemsep{1em}1.2cm}
+%     \ligne{0.1mm}\vspace{-0.5cm}
+\indentStd\begin{longtable}[t]{p{\lenB}p{\lenC}}
+
+    }
+{\end{longtable}}
+
+\newcommand{\ligne}[1]{\rule[0.5ex]{.96\textwidth}{#1}\\}
+\newcommand{\interRubrique}{\bigskip}
+\newcommand{\styleRub}[1]{\noindent\textsf{\textbf{\Large #1}}\par}
+\newcommand{\indentStd}{\noindent\hspace{\lenA}}
+
+
+
+\newcommand{\lieu}[1]{\textsl{#1}}
+\newcommand{\activite}[1]{\textbf{#1}}
+\newcommand{\comment}[1]{\textsl{#1}}
+\newcommand{\papername}[1]{\textsl{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commandes utilisables dans le descriptif %
+%
+% Modifiables ï¿½ loisir...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+\newcommand{\vectd}{\mathbf{d}}
+\newcommand{\vectf}{\mathbf{f}}
+
+
+% couleur
+\newcommand{\bleu}[1]{{\color{blue}{#1}}}
+\newcommand{\ver}[1]{{\color{green}{#1}}}
+\newcommand{\rouge}[1]{{\color{red}{#1}}}
+
+\newcommand{\pasfini}[1]{\bleu{}\todoi{Pas fini! je te dirai quand
+    c'est fait}}
+
+
+    %\usepackage[nottoc, notlof, notlot]{tocbibind}
+\usepackage{minitoc}
+\setcounter{minitocdepth}{2}
+\mtcindent=10pt
+
+\mtcsetfeature{minitoc}{open}{\vspace{1.5mm}}
+\mtcsetfeature{minitoc}{close}{\vspace{1.5mm}}
+
+
+\let\minitocORIG\minitoc
+\renewcommand{\minitoc}{\minitocORIG \vspace{1.5em}}
+
+%nouvelles polices pour minitoc
+\renewcommand{\mtcfont}{\sffamily\small}
+\renewcommand{\mtcSfont}{\sffamily\small\upshape\bfseries}
+\renewcommand{\mtcSSfont}{\sffamily\small}
+\renewcommand{\mtcSSSfont}{\sffamily\small}
+\renewcommand{\mtifont}{\sffamily\large\bfseries}
+\renewcommand{\ptifont}{\sffamily\Huge\bfseries}
+% Use \minitoc where to put a table of contents
+
+%\addto\captionsfrench{\def\tablename{{T\scshape{ableau}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Commandes utilisables dans le descriptif %
+%
+% Modifiables ï¿½ loisir...
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "these"
+%%% End:

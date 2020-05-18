@@ -1,0 +1,193 @@
+\documentclass[a4paper,10pt,twoside]{StyleThese}
+
+\def\myauthor{Romain Tavenard}
+\def\mytitle{Machine Learning for Time Series}
+
+\synctex=1
+
+\include{formatAndDefs}
+%\renewcommand{\baselinestretch}{1.5}
+
+
+% \newtoggle{cv}
+\newtoggle{intro}
+\newtoggle{metrics}
+\newtoggle{repr}
+\newtoggle{conclu}
+
+
+% \toggletrue{cv}
+\toggletrue{intro}
+\toggletrue{metrics}
+\toggletrue{repr}
+\toggletrue{conclu}
+
+\begin{document}
+\renewcommand{\bibname}{{\sffamily Bibliography}}
+
+% page de titre
+\include{TitlePage}
+
+
+%\dominitoc
+\dominitoc
+
+\pagenumbering{roman}
+
+\tableofcontents \addcontentsline{toc}{chapter}{Table of contents} \mtcaddchapter
+% \listoffigures \addcontentsline{toc}{chapter}{List of Figures} \mtcaddchapter                     %new code
+%\listoftables \addcontentsline{toc}{chapter}{List of Tables}   \mtcaddchapter
+%\chapter*{Remerciements}
+%\addcontentsline{toc}{chapter}{Remerciements}
+%A faire en dernier :-)
+%\input{remerciements}
+
+%\input{notations}
+
+% \cleardoublepage
+
+
+\mainmatter
+
+
+%\firstchapteris{1}
+
+\chapter{Introduction}
+\minitoc
+\label{cha:introduction}%\mtcaddchapter
+\iftoggle{intro}{\input{sections/intro.tex}}
+
+\chapter{Defining adequate metrics for structured data}
+\minitoc
+\label{cha:metrics}%\mtcaddchapter
+\iftoggle{metrics}{\input{sections/metrics.tex}}
+
+\chapter{Learning sensible representations for time series}
+\minitoc
+\label{cha:latent}%\mtcaddchapter
+\iftoggle{repr}{\input{sections/representations.tex}}
+
+
+\chapter{Perspectives}
+\minitoc
+\label{cha:conclusion}
+\iftoggle{conclu}{\input{sections/conclu.tex}}{}
+
+
+\bibliographystyle{StyleThese}
+%\bibliographystyle{StyleTheseWithEtAl}
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliography{references}
+
+%\printnomenclature
+
+\clearpage
+\thispagestyle{empty}
+%\noindent\rule[2pt]{\textwidth}{0.5pt}
+%\\
+%\begin{minipage}{1.0\linewidth}
+%   \begin{center}
+
+%     {\sffamily\textbf{Apprentissage statistique pour le signal :
+%         applications aux Interfaces Cerveau-Machine\\}}
+%   \end{center} {\small\sffamily\textbf{Résumé :}}
+%   \small Les Interfaces Cerveau-Machine (ICM) nécessitent
+%   l'utilisation de méthodes d'apprentissage statistique pour la
+%   reconnaissance de signaux. Dans cette thèse, nous proposons une
+%   approche générale permettant d'intégrer des connaissances a priori
+%   dans le processus d'apprentissage. Cette approche consiste à
+%   apprendre de manière jointe le classifieur et la représentation des
+%   données lors d'une optimisation unique. Nous nous sommes plus
+%   particulièrement intéressés à des problèmes de sélection de capteurs
+%   et proposons plusieurs termes de régularisation adaptés pour ces
+%   problèmes.
+
+
+%   Notre première contribution est une méthode d'apprentissage
+%   supervisé de filtres: le filtrage vaste marge. Un filtrage
+%   maximisant la marge entre les échantillons est appris et permet de
+%   s'adapter automatiquement aux caractéristiques des signaux tout en
+%   restant interprétable. Une application ICM et une extension 2D du
+%   filtrage a été réalisée.
+
+
+%   La seconde contribution est une méthode d'apprentissage multitâche
+%   parcimonieuse. Elle permet de sélectionner de manière jointe un
+%   ensemble de noyaux pertinents pour l'ensemble des tâches de
+%   classification. Des algorithmes efficaces ont été proposés pour
+%   résoudre le problème d'optimisation et des expérimentations
+%   numériques ont montré l'intérêt de l'approche.
+
+
+%   Finalement, la troisième contribution est une application de
+%   l'apprentissage multitâche parcimonieux sur un ensemble de jeux de
+%   données ICM. Un terme de régularisation plus général permettant de
+%   promouvoir une similarité entre classifieurs est également
+%   proposé. Les résultats numériques ont montré qu'une réduction
+%   importante du temps de calibration peut être obtenue grâce à
+%   l'apprentissage multitâche proposé.
+%   \\
+%   \\
+%   {\small\sffamily\textbf{Mots clés :}} Apprentissage statistique,
+%   traitement du signal, filtrage, interfaces cerveau-machine,
+%   séparateurs à vaste marge, méthodes parcimonieuses.
+% %\end{minipage}
+% %\\
+% %\noindent\rule[2pt]{\textwidth}{0.5pt}
+% % \end{vcenterpage}
+% \vspace{1cm}
+% % \begin{vcenterpage}
+% %\noindent\rule[2pt]{\textwidth}{0.5pt}
+% %\begin{minipage}{1\linewidth}
+%   \begin{center} {\normalsize\sffamily\textbf{Machine learning for
+%         signal processing: applications to Brain Computer
+%         Interfaces\\}}
+%   \end{center} {\small\sffamily\textbf{Abstract:}}\small
+%   Brain Computer Interfaces (BCI) require the use of statistical
+%   learning methods for signal recognition. In this thesis we propose a
+%   general approach using prior knowledge on the problem at hand
+%   through regularization. To this end, we learn jointly the classifier
+%   and the feature extraction step in a unique optimization problem. We
+%   focus on the problem of sensor selection, and proposed several
+%   regularization terms adapted to the problem.
+
+%   The first contribution introduced in the thesis is a filter learning
+%   method called large margin filtering. It consists in learning a
+%   filtering maximizing the margin between samples of each classes so
+%   as to adapt to the properties of the features. In addition, this
+%   approach is easy to interpret and can lead to the selection of the
+%   most relevant sensors. Numerical experiments on a real life BCI
+%   problem and a 2D image classification show the good behaviour of our
+%   method both in terms of performance and interpretability.
+
+%   The second contribution is a general sparse multitask learning
+%   approach. Several classifiers are learned jointly and discriminant
+%   kernels for all the tasks are automatically selected. We propose
+%   some efficient algorithms and numerical experiments have shown the
+%   interest of our approach.
+
+%   Finally, the third contribution is a direct application of the
+%   sparse multitask learning to a BCI event-related potential
+%   classification problem. We propose an adapted regularization term
+%   that promotes both sensor selection and similarity between the
+%   classifiers. Numerical experiments show that the calibration time of
+%   a BCI can be drastically reduced thanks to the proposed multitask
+%   approach.
+%   \\
+%   \\
+%   {\small\sffamily\textbf{Keywords:}} Machine learning, signal
+%   processing, filtering, brain computer interfaces, support vector
+%   machines, sparse methods.
+% %\end{minipage}
+% %\noindent\rule[2pt]{\textwidth}{0.5pt}
+
+
+
+\end{document}
+
+
+%%% Local Variables:
+%%% ispell-local-dictionary: "french"
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
