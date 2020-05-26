@@ -146,7 +146,8 @@ coefficients are reported in blue.
 Note that coefficients $\beta_1^{(1)}$, $\beta_2^{(1)}$ and $\beta_2^{(2)}$ are
 zero, hence not represented in logscale.
 For both SGL and SSGL, the goal is to estimate ground-truth coefficient, hence
-the closer their bars are to the blue one, the better.
+the closer their bars are to the blue one (or to 0 when the blue bar is not
+visible), the better.
 \label{fig:ssgl}}
 \end{figure}
 
@@ -177,7 +178,7 @@ However, if the learned shapelets are definitively discriminative, they are
 often very different from actual pieces of a real series in the
 dataset. As such, these shapelets might not be suited to explain a particular
 classifier's decision.
-In~\cite{wang2020},
+In~\cite{wang2019},
 we rely on a simple convolutional network to classify time
 series and use an adversarial network that acts as a regularizer to ensure that
 learned shapelets are un-distinguishable from actual time series pieces from
