@@ -6,7 +6,7 @@
 \synctex=1
 
 \include{formatAndDefs}
-%\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\baselinestretch}{1.2}
 
 
 % \newtoggle{cv}
@@ -82,7 +82,13 @@
 %\printnomenclature
 
 \clearpage
-\thispagestyle{empty}
+
+
+\appendix
+\chapter{Curriculum Vitae}
+\label{cha:cv}
+\includepdf[pagecommand={\thispagestyle{empty}},pages=-]{../cv/cv.pdf}
+
 %\noindent\rule[2pt]{\textwidth}{0.5pt}
 %\\
 %\begin{minipage}{1.0\linewidth}
