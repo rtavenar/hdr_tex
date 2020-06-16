@@ -1,0 +1,343 @@
+Ce document présente une synthèse de mes travaux de recherche consacrés au
+développement d'outils d'apprentissage statistique pour des données structurées,
+comme des graphes (\emph{cf.} Sec.~\ref{sec:ot}) ou des séries temporelles
+(dans le reste de ce document).
+On peut toutefois noter que l'un des aspects de ma contribution à ce domaine de
+recherche n'est pas abordé dans ce document (ou seulement de manière marginale
+dans sa version
+\href{https://rtavenar.github.io/hdr/}{Jupyter book}). Il s'agit du
+développement de logiciel \emph{open source}, notamment à travers la création
+et la maintenance de la librairie \texttt{tslearn}~\cite{tslearn}%
+\footnote{\texttt{tslearn} est une librairie Python pour l'apprentissage
+statistique appliqué aux séries temporelles qui fournit des outils pour le
+pré-traitement, l'extraction de descripteurs, le \emph{clustering} ou la
+classification de séries temporelles. J'ai initié ce projet en 2017.}.
+
+Je réalise en écrivant ces lignes que, au cours de ces travaux, j'ai traité les
+séries temporelles comme si elles étaient des objets protéiformes.
+Tout d'abord, en termes de domaine applicatif, j'ai travaillé avec des vidéos
+durant mon post-doctorat à l'Idiap puis je me suis intéressé aux données
+environnementales (que ce soit des niveaux de concentration en polluants dans
+les cours d'eau, des séries d'images satellites ou des trajectoires de bateaux)
+lorsque j'ai rejoint le laboratoire LETG (\emph{Littoral, Environnement,
+Géomatique, Télédétection}) en 2013.
+Plus important encore, ces applications diverses ont donné lieu à des
+traitements variés.
+Notamment, un point central est la façon dont la dimension temporelle des
+données est intégrée dans les représentations utilisées.
+Durant le post-doctorat de Pierre Gloaguen~\cite{gloaguen2020}, pour des raisons
+de complexité algorithmique, nous nous sommes basés sur un pré-\emph{clustering}
+des données ignorant totalement l'information temporelle pour pouvoir, dans un
+second temps, modéliser des segments de trajectoires à l'aide d'un modèle plus
+fin en temps continu.
+À l'autre opposé du spectre, dans le cadre des thèses d'Adeline Bailly et de
+Mael Guillemé~\cite{guilleme:hal-02513295,tavenard:halshs-01561461},
+nous avons mis en lumière l'importance de l'information temporelle en l'incluant
+directement dans la représentation utilisée pour la classification.
+Les approches basées alignement (telles que l'algorithme
+\emph{Dynamic Time Warping})
+se placent en quelque sorte entre ces deux extrêmes.
+En effet, elles ne prennent en compte que l'ordre (et non les temps
+d'apparition) des éléments contenus dans les séries pour estimer la
+similarité entre séries.
+Sur la prise en compte de l'aspect temporel, il est enfin à noter que,
+contrairement aux autres approches présentées dans ce manuscrit, les modèles
+convolutionnels présentés en Sec.~\ref{sec:cnn} reposent sur une hypothèse
+additionnelle d'échantillonnage régulier (\emph{i.e.}
+les observations composant les séries temporelles sont acquises à intervalle de
+temps régulier et cet intervalle est le même pour toutes les séries présentes
+dans la collection).
+
+Je me suis intéressé, plus récemment, à d'autres types de données structurées
+comme les graphes et il m'est apparu que la question de l'encodage de
+l'information de structure est là aussi un aspect important.
+Dans le contexte de la thèse de Titouan Vayer, nous avons utilisé des
+distances issues du transport optimal dont la formulation est très proche de
+celle du problème de \emph{Dynamic Time Warping} (même si les méthodes de
+résolution diffèrent).
+
+Dans la suite de cette synthèse, je liste mes principales contributions
+qui sont présentées plus en détail dans le corps (en anglais) de ce document
+-- et dans les publications scientifiques associées -- en les organisant en
+deux familles : les contributions sur les métriqes d'une part et celles
+concernant l'apprentissage de représentations d'autre part.
+
+\section*{Définition de métriques adaptées aux données structurées}
+
+La définition de métriques adaptées aux objets à comparer est au coeur de
+nombreuses méthodes d'apprentissage statistique (plus proches voisins,
+méthodes à noyaux, \emph{etc.}).
+Lorsque l'on s'intéresse à des objets complexes, il est important d'apporter
+un soin particulier au choix de ces métriques afin d'exprimer une notion
+de similarité adaptée.
+Dans ce cadre, j'ai proposé des méthodes pour la comparaison de séries
+temporelles ou de graphes.
+
+\haveabreak{}
+
+Tout d'abord, comme detaillé en Sec.~\ref{sec:kernel}, nous avons proposé un
+noyau adapté à la comparaison de séries temporelles vues comme des
+distributions discrètes sur l'espace produit \emph{feature}-temps.
+Dans ce cadre, nous avons notamment apporté un soin particulier à la complexité
+en temps de la méthode retenue.
+Pour cela, nous avons utilisé des méthodes d'approximation de noyaux permettant
+d'obtenir une complexité en temps linéaire en la taille des séries pour la phase
+hors ligne de calcul des représentations et linéaire en la dimension de l'espace
+de représentation pour le calcul de similarité entre représentations de séries
+temporelles, contre un habituel coût quadratique pour les méthodes basées
+alignement\footnote{Ce travail a fait partie de la thèse de doctorat d'Adeline
+Bailly. Nous avons co-supervisé cette thèse avec Laetitia Chapel.}.
+
+\haveabreak{}
+
+Ensuite, comme détaillé en Sec.~\ref{sec:dtw}, je me suis intéressé à l'apport
+des approches basées alignement.
+Dans ce contexte, nous avons proposé une méthode
+permettant de contraindre la taille de l'alignement résultant d'une comparaison
+entre séries, afin d'éviter certains types d'alignement
+pathologiques~\cite{zhang2017dynamic}.
+L'apport dans ce cas est principalement la proposition d'un algorithme exact de
+complexité temporelle cubique pour le nouveau problème contraint%
+\footnote{Ce travail fait partie de la thèse de doctorat de Zheng Zhang.
+Il a été réalisé
+durant le séjour de Zheng au LETG en 2015-2016. Je n'ai pas été impliqué dans
+l'encadrement de la thèse de Zheng.}.
+
+Nous avons également utilisé les approches basées alignement, et plus
+particulièrement l'algorithme de \emph{Dynamic Time Warping} (DTW)
+pour une application de ré-échantillonnage non linéaire de séries temporelles
+multivariées.
+Plus précisément, notre méthode fait l'hypothèse qu'il existe une modalité de
+référence qui puisse être utilisée pour réaligner (temporellement)
+les autres modalités~\cite{dupas:halshs-01228397}.
+Cette approche peut être vue comme une version DTW d'autres travaux utilisant
+le transport optimal pour des problématiques d'adaptation de
+domaine~\cite{courty:hal-02112785}, à la différence près que ces derniers ne
+reposent pas sur l'utilisation d'une modalité de référence, qui a été guidée
+dans notre cas par le cadre applicatif visé.
+En effet, il s'agissait pour nous d'aligner des profils de concentration en
+polluants dans des cours d'eau d'un bassin versant et l'on avait à notre
+disposition une modalité ``débit'' qui permettait d'identifier l'évolution des
+crues%
+\footnote{Ces travaux font partie de la thèse de doctorat de Rémi Dupas
+(en Sciences de
+l'Environnement). Je n'ai pas été impliqué dans l'encadrement de la thèse de
+Rémi.}.
+
+Enfin, nous nous sommes plus récemment intéressés au problème de comparaison
+de séries temporelles hétérogènes.
+Dans ce contexte, on veut comparer des séries dont les \emph{features}
+ne vivent pas dans les mêmes espaces et on cherche à aligner à la fois les
+espaces de \emph{features} et les dimensions temporelles des séries.
+Pour cela, nous avons proposé un cadre qui combine l'optimisation sur une
+transformation de l'espace des \emph{features} d'une part et le
+Dynamic Time Warping (DTW) d'autre part et nous avons proposé deux algorithmes
+pour la résolution de ce problème : l'un sous la forme de
+\emph{Block Coordinate Descent} et l'autre sous la forme de descente de
+gradient projeté.
+Ces travaux sont disponibles sous la forme de
+\emph{preprint}~\cite{vayer2020time}%
+\footnote{Ces travaux font partie de la thèse de doctorat de Titouan Vayer.
+Je co-supervise Titouan avec Laetitia Chapel et Nicolas Courty.}.
+
+\haveabreak{}
+
+Enfin, comme présenté en Sec.~\ref{sec:ot}, nous nous sommes penchés sur le cas
+des graphes non orientés étiquetés.
+En les voyant comme des distributions discrètes dans l'espace
+structure-\emph{features}, nous avons proposé une nouvelle distance de transport
+optimal pour comparer de tels objets.
+Plus précisément, nous avons introduit une distance appelée
+Fused Gromov Wasserstein qui interpole entre une distance de Wasserstein qui ne
+prendrait en compte que les étiquettes des noeuds du graphe et une distance de
+Gromov-Wasserstein qui se focaliserait, elle, sur la structure du graphe,
+oubliant ainsi les étiquettes associées aux noeuds.
+Ici, nous avons proposé un algorithme de gradient conditionnel permettant
+de résoudre (de manière non exacte) le problème d'optimisation sous-jacent.
+Nous avons également présenté une résolution en forme close et de complexité
+quasi-linéaire du problème de Gromov-Wasserstein dans le cas mono-dimensionnel.
+
+\section*{Apprentissage de représentations pour les séries temporelles}
+
+Une autre piste de recherche à laquelle je me suis intéressé est
+l'apprentissage de représentations latentes pour les séries temporelles.
+J'ai dans ce cadre proposé des représentations issues de
+modèles de mélange (\emph{cf.} Sec.~\ref{sec:topics}) ou des \emph{feature maps}
+intermédiaires dans des réseaux de neurones (comme dans les
+Sec.~\ref{sec:cnn} et Sec.~\ref{sec:early}).
+
+\haveabreak{}
+
+Les \emph{topic models} sont des modèles de mélange qui permettent de manipuler
+des documents vus comme des ensembles de \emph{features} quantifiées (ou sacs de
+mots) et qui permettent d'extraire des thèmes (\emph{topics}) latents, un
+\emph{topic} étant une distribution dans l'espace des \emph{features}, à partir
+d'un corpus de documents.
+Dans ces méthodes, les séries temporelles sont donc vues comme des
+distributions discrètes dans l'espace produit temps-\emph{features}.
+
+Durant mon post-doctorat, nous avons proposé une extension du modèle
+\emph{Hierarchical Dirichlet Latent Semantic Motifs}
+(HDLSM) introduit dans~\cite{EmonetCVPR2011} (\emph{cf.} (Sec.~\ref{sec:hdlsm}).
+Ce modèle génératif se base sur l'extraction de motifs temporels
+(par opposition aux \emph{topics} statiques).
+Un échantillonnage de Gibbs est utilisé pour estimer à la fois le contenu des
+motifs (de nombre inconnu) et leur localisation temporelle dans les documents.
+Notre variante supervisée~\cite{tavenard:hal-00872048} se base sur le modèle
+génératif de HDLSM en y ajoutant une composante qui met en relation les motifs
+extraits et la classe à prédire.
+
+Plus récemment, j'ai été impliqué dans un projet lié à la surveillance du
+traffic maritime.
+Dans ce contexte, un enjeu majeur est l'identification automatique de flux de
+navigation à partir de grands nombres de trajectoires observées (\emph{cf.}
+Sec.~\ref{sec:oup}).%
+\footnote{Ces travaux font partie du post-doctorat de Pierre Gloaguen.
+Ils ont été réalisés en collaboration avec Laetitia Chapel et Chloé Friguet.}
+Le modèle que nous avons proposé diffère du précédant en plusieurs points :
+
+\begin{itemize}
+\item Il s'agit ici d'une approche non supervisée ;
+\item On ne cherche pas ici de motifs localisés (avec une possibilité de
+recouvrements entre occurrences de motifs) mais plutôt de segmentation
+de trajectoires en modes de mouvements homogènes;
+\item Chaque mode de mouvement est décrit à l'aide d'un modèle en temps continu;
+\item Pour permettre un meilleur passage à l'échelle, un algorithme d'inférence
+variationnelle stochastique est utilisé en lieu et place de l'échantillonnage
+de Gibbs.
+\end{itemize}
+
+\haveabreak{}
+
+J'ai également proposé l'utilisation d'architectures convolutionnelles pour le
+traitement de séries temporelles.
+
+Nous avons montré dans~\cite{leguennec:halshs-01357973} que l'utilisation de
+techniques d'augmentation de données était une méthode efficace d'amélioration
+des capacités de généralisation des réseaux convolutionnels.
+Les stratégies d'augmentation de données que nous avons considéré dans ces
+travaux couvrent les déformations temporelles locales et l'extraction de
+sous-fenêtres%
+\footnote{Ce travail a été réalisé dans le cadre du stage de Master 2 d'Arthur
+Le Guennec.
+J'ai co-supervisé Arthur avec Simon Malinowski.}.
+
+Nous nous sommes également intéressés à l'apprentissage non supervisé de
+représentations.
+Dans ce contexte, nous avons cherché à apprendre des réseaux convolutionnels
+en fixant la contrainte que la distance obtenue dans l'espace des
+\emph{feature maps} soit aussi proche que possible d'une similarité
+\emph{Dynamic Time Warping} (DTW) entre les séries d'origines.
+Le modèle résultant est une instance de modèle siamois et nous avons montré
+dans~\cite{lods:hal-01565207} qu'un tel modèle permettait de plonger les séries
+dans un espace dans lequel les méthodes habituelles d'apprentissage statistique
+(comme les $k$-means par exemple) peuvent opérer%
+\footnote{Ce travail a été réalisé dans le cadre du stage de Master 2 d'Arnaud
+Lods.
+J'ai co-supervisé Arnaud avec Simon Malinowski.}.
+
+Dans la littérature de classification de séries temporelles, les modèles
+convolutionnels qui sont utilisés possèdent la plupart du temps une couche
+d'aggrégation qui fait disparaitre l'information temporelle.
+Dans~\cite{guilleme:hal-02513295}, nous nous sommes intéressés tout
+particulièrement à l'importance de cette information temporelle et avons
+proposé une approche à base de \emph{shapelets}
+aléatoires localisées\footnote{Les \emph{shapelets} sont des sous-séries,
+similaires dans leur usage à des filtres de convolution.}.
+Cette approche nous a amené à introduire un nouveau type de régularisation pour
+les réseaux de neurones qui est une modification du Group-Lasso appelée
+Semi-Sparse Group Lasso.
+Cette variante permet d'induire de la sparsité non pas sur toutes les variables
+individuelles mais sur une sous-partie seulement de ces variables,
+en plus de la régularisation
+par groupe de variables issue du Group Lasso%
+\footnote{Ces travaux font partie de la thèse de Mael Guillemé.
+Je n'ai pas été impliqué directement dans la supervision de la thèse de Mael.}.
+
+Autre point caractéristique de la littérature de classification de séries
+temporelles, les modèles à base de \emph{shapelets} sont historiquement utilisés
+pour fournir des classifications explicables sous la forme de présence / absence
+de motifs discriminants dans les séries.
+Seulement, les premières approches étaient particulièrement coûteuses en temps
+de calcul en raison du long processus d'énumération des \emph{shapelets} et les
+approches plus récentes ont fait disparaitre l'aspect interprétable au profit
+de meilleures performances en classification et d'une complexité réduite.
+Nous avons donc proposé une approche à base de réseaux convolutionnels
+permettant d'apprendre des filtres de convolution ressemblant à des morceaux
+de séries tout en conservant de bonnes performances en discrimination.
+Pour cela, nous utilisons un réseau adversaire dont le but est de discriminer
+entre les filtres appris et de vrais morceaux de séries.
+Ce travail est disponible sous forme de \emph{preprint}~\cite{wang2019}%
+\footnote{Ce travail fait partie de la thèse de Yichang Wang.
+Je co-supervise Yichang avec Élisa Fromont, Rémi Emonet et Simon
+Malinowski.}.
+
+\haveabreak{}
+
+Enfin, je me suis intéressé à une tâche d'apprentissage statistique qui est
+spécifique aux séries temporelles : la classification précoce.
+La classification précoce de séries temporelles consiste à prendre une décision
+(attribuer une classe prédite à une série temporelle observée) le plus tôt
+possible dans un problème de classification.
+
+Dans ce contexte, les travaux de Dachraoui \emph{et al.} sont basés sur
+l'optimisation d'un coût de classification
+pénalisé.
+Leur approche utilise un \emph{clustering} des données pour estimer une
+espérance de coûts futurs.
+Nous montrons en Sec.~\ref{sec:early} que l'utilisation de ce \emph{clustering}
+peut mener à des cas pathologiques.
+Nous avons tout d'abord travaillé sur un passage de cette méthode au cas limite
+dans lequel on aurait un exemple d'apprentissage par
+cluster~\cite{tavenard:halshs-01339007}.
+
+Plus récemment, nous nous sommes focalisés sur la proposition d'un modèle de
+classification précoce appris de bout en bout par descente de gradient.
+La méthode proposée permet un certain nombre d'améliorations par rapport aux
+méthodes de l'état de l'art.
+Tout d'abord, elle est peu gourmande en temps de calcul puisqu'elle ne
+nécessite pas d'apprendre un classifieur différent pour chaque taille de série.
+Ensuite, ce modèle, doté de deux sorties (l'une permettant de décider s'il est
+temps ou non de prendre une décision, l'autre permettant de prendre la décision
+effective le moment venu), est poussé à apprendre une représentation latente
+qui soit plus riche car permettant de nourrir les deux sorties du modèle.
+Finalement, nous proposons une nouvelle fonction de coût qui permet d'éviter
+certains écueils des fonctions de coût usuelles pour la classification précoce
+qui ont facilement tendance à pousser les modèles soit à prédire ridiculement
+tôt soit à attendre sans raison.
+Ces travaux sont disponibles sous forme de
+\emph{preprint}~\cite{ruwurm:hal-02174314}%
+\footnote{Ces travaux font partie de la thèse de doctorat de Marc Rußwurm.
+Marc est un doctorant de TU Munich qui est venu en France pour une période de
+4 mois en 2018-2019. J'ai co-supervisé Marc avec Nicolas Courty
+et Sébastien Lefèvre durant son séjour en France.}.
+
+\section*{Perspectives}
+
+Cette présentation de mes travaux passés me mène à dresser quelques
+perspectives, pour des travaux en cours ou à venir.
+
+Tout d'abord, comme expliqué plus haut, nous avons commencé à nous intéresser à
+la comparaison de séries temporelles hétérogènes. Si ces travaux me semblent
+encourageants, il apparait que la possibilité de comparer des séquences d'objets
+quelconques (et donc pas forcéments des séquences de vecteurs de
+$\mathbb{R}^p$), comme des graphes évoluant dans le temps par exemple, serait
+le réel objectif, à terme, de ces travaux.
+Ensuite, en écho aux parallèles dressés dans ce manuscrit entre DTW et distance
+de Wasserstein, il me semble que la DTW pourrait être un outil efficace pour
+aborder des problématiques d'adaptation de domaine temporel, qui sont par
+exemple très présentes dès lors que l'on s'intéresse à la télédétection.
+
+À plus long terme, il me semble que la question (générale) d'apprendre
+la meilleure manière de comparer les séries temporelles d'un jeu de données à
+partir des données elles-mêmes (plutôt que de pré-supposer un modèle de
+comparaison immuable) est une perspective importante du domaine de la
+classification de séries temporelles.
+Enfin, l'apprentissage faiblement supervisé de représentations
+est également un outil central qui pourrait bénéficier à de nombreuses
+applications pour lesquelles la collecte de données étiquetées est coûteuse et
+donc peu réaliste à large échelle.
+Il me semble que la structure des données (temporelle
+comme structure de graphe) peut être dans ce cadre un guide intéressant pour
+apprendre des représentations pertinentes sans devoir faire appel à un volume de
+données étiquetées trop important.

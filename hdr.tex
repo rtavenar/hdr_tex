@@ -9,14 +9,14 @@
 \renewcommand{\baselinestretch}{1.2}
 
 
-% \newtoggle{cv}
+\newtoggle{resume}
 \newtoggle{intro}
 \newtoggle{metrics}
 \newtoggle{repr}
 \newtoggle{conclu}
 
 
-% \toggletrue{cv}
+\toggletrue{resume}
 \toggletrue{intro}
 \toggletrue{metrics}
 \toggletrue{repr}
@@ -51,6 +51,11 @@
 
 
 %\firstchapteris{1}
+
+\chapter*{Synthèse en français}
+\minitoc
+\label{cha:resume}%\mtcaddchapter
+\iftoggle{resume}{\input{sections/resume.tex}}
 
 \chapter{Introduction}
 \minitoc
