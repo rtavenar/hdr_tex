@@ -288,11 +288,19 @@ journal	= {arXiv}
 	Volume = {124},
 	Year = {2019}}
 
-@misc{tslearn,
-	Author = {Romain Tavenard and Johann Faouzi and Gilles Vandewiele and Felix Divo and Guillaume Androz and Chester Holtz and Marie Payne and Roman Yurchak and Marc Ru{\ss}wurm and Kushal Kolar and Eli Woods},
-	Note = {\url{https://github.com/rtavenar/tslearn}},
-	Title = {tslearn: A machine learning toolkit dedicated to time-series data},
-	Year = {2017}}
+@article{tslearn,
+       author  = {Romain Tavenard and Johann Faouzi and Gilles Vandewiele and
+                  Felix Divo and Guillaume Androz and Chester Holtz and
+                  Marie Payne and Roman Yurchak and Marc Ru{\ss}wurm and
+                  Kushal Kolar and Eli Woods},
+       title   = {Tslearn, A Machine Learning Toolkit for Time Series Data},
+       journal = {Journal of Machine Learning Research},
+       year    = {2020},
+       volume  = {21},
+       number  = {118},
+       pages   = {1-6},
+       url     = {http://jmlr.org/papers/v21/20-091.html}
+     }
 
 @article{ellis20072007,
 	Author = {Ellis, Daniel PW and Cotton, Courtenay Valentine},
@@ -567,14 +575,15 @@ year = {2007},
   HAL_VERSION = {v1},
 }
 
-@unpublished{vayer:hal-02174316,
-  TITLE = {{Fused Gromov-Wasserstein distance for structured objects: theoretical foundations and mathematical properties}},
-  AUTHOR = {Vayer, Titouan and Chapel, Laetitia and Flamary, R{\'e}mi and Tavenard, Romain and Courty, Nicolas},
-  NOTE = {working paper or preprint},
-  YEAR = {2019},
-  MONTH = Jul,
-  HAL_ID = {hal-02174316},
-  HAL_VERSION = {v1},
+@article{vayer:hal-02174316,
+  title={Fused Gromov-Wasserstein Distance for Structured Objects},
+  author={Vayer, Titouan and Chapel, Laetitia and Flamary, Remi and Tavenard, Romain and Courty, Nicolas},
+  journal={Algorithms},
+  volume={13},
+  number={9},
+  pages={212},
+  year={2020},
+  publisher={Multidisciplinary Digital Publishing Institute}
 }
 
 @inproceedings{dachraoui2015early,
@@ -823,15 +832,204 @@ year = {2007},
   YEAR = {2020}
 }
 
-@unpublished{wang2019,
+@inproceedings{wang2019,
   author    = {Yichang Wang and
                R{\'{e}}mi Emonet and
                {\'{E}}lisa Fromont and
                Simon Malinowski and
-               Etienne Menager and
-               Lo{\"{\i}}c Mosser and
                Romain Tavenard},
   title     = {Learning Interpretable Shapelets for Time Series Classification through
                Adversarial Regularization},
-  year      = {2019}
+  booktitle={Accepted for publication in the Proceedings of the International Conference on Tools with Artificial Intelligence},
+  year={2020}
+}
+
+
+@inproceedings{malinowski:halshs-00912512,
+  TITLE = {{1d-SAX: A Novel Symbolic Representation for Time Series}},
+  AUTHOR = {Malinowski, Simon and Guyet, Thomas and Quiniou, Ren{\'e} and Tavenard, Romain},
+  URL = {https://halshs.archives-ouvertes.fr/halshs-00912512},
+  BOOKTITLE = {{International Symposium on Intelligent Data Analysis}},
+  ADDRESS = {United Kingdom},
+  NUMBER = {12},
+  PAGES = {273-284},
+  YEAR = {2013},
+  DOI = {10.1007/978-3-642-41398-8\_24},
+  KEYWORDS = {SAX ; time series retrieval},
+  PDF = {https://halshs.archives-ouvertes.fr/halshs-00912512/file/paper_IDA.pdf},
+  HAL_ID = {halshs-00912512},
+  HAL_VERSION = {v1},
+}
+
+@inproceedings{guijorubio:hal-02371422,
+  TITLE = {{A Hybrid Approach to Time Series Classification with Shapelets}},
+  AUTHOR = {Guijo-Rubio, David and Guti{\'e}rrez, Pedro A and Tavenard, Romain and Bagnall, Anthony},
+  URL = {https://hal.archives-ouvertes.fr/hal-02371422},
+  BOOKTITLE = {{Intelligent Data Engineering and Automated Learning -- IDEAL}},
+  ADDRESS = {Manchester, United Kingdom},
+  PAGES = {137-144},
+  YEAR = {2019},
+  MONTH = Nov,
+  DOI = {10.1007/978-3-030-33607-3\_16},
+  PDF = {https://hal.archives-ouvertes.fr/hal-02371422/file/Hybrid_Shapelet_final.pdf},
+  HAL_ID = {hal-02371422},
+  HAL_VERSION = {v1},
+}
+
+@article{bailly:halshs-01515283,
+  TITLE = {{Nonlinear Time-Series Adaptation for Land Cover Classification}},
+  AUTHOR = {Bailly, Adeline and Chapel, Laetitia and Tavenard, Romain and Camps-Valls, Gustau},
+  URL = {https://halshs.archives-ouvertes.fr/halshs-01515283},
+  JOURNAL = {{IEEE Geoscience and Remote Sensing Letters}},
+  PUBLISHER = {{IEEE - Institute of Electrical and Electronics Engineers}},
+  YEAR = {2017},
+  DOI = {10.1109/LGRS.2017.2686639},
+  KEYWORDS = {Land cover classification ; time series ; domain adaptation ; manifold alignment ; kernel methods},
+  PDF = {https://halshs.archives-ouvertes.fr/halshs-01515283/file/final_version.pdf},
+  HAL_ID = {halshs-01515283},
+  HAL_VERSION = {v1},
+}
+
+@inproceedings{damodaran:hal-01620604,
+  TITLE = {{Randomized Nonlinear Component Analysis for Dimensionality Reduction of Hyperspectral Images}},
+  AUTHOR = {Damodaran, Bharath Bhushan and Courty, Nicolas and Tavenard, Romain},
+  URL = {https://hal.archives-ouvertes.fr/hal-01620604},
+  BOOKTITLE = {{IGARSS 2017 - IEEE International Geoscience and Remote Sensing Symposium}},
+  ADDRESS = {Houston, United States},
+  SERIES = {International Geoscience and Remote Sensing Symposium},
+  PAGES = {1-4},
+  YEAR = {2017},
+  MONTH = Jul,
+  KEYWORDS = {Hyperspectral image classification ; Kernel PCA ;  Kernel MNF ;  Nonlinear component analysis ;  Random Fourier feature ;  Kernel approximation},
+  PDF = {https://hal.archives-ouvertes.fr/hal-01620604/file/RNLCA.pdf},
+  HAL_ID = {hal-01620604},
+  HAL_VERSION = {v1},
+}
+
+@inproceedings{bailly:halshs-01343211,
+  TITLE = {{Classification of MODIS Time Series with Dense Bag-of-Temporal-SIFT-Words: Application to Cropland Mapping in the Brazilian Amazon}},
+  AUTHOR = {Bailly, Adeline and Arvor, Damien and Chapel, Laetitia and Tavenard, Romain},
+  URL = {https://halshs.archives-ouvertes.fr/halshs-01343211},
+  BOOKTITLE = {{IEEE International Geoscience and Remote Sensing Symposium}},
+  ADDRESS = {Beijing, China},
+  YEAR = {2016},
+  MONTH = Jul,
+  DOI = {10.1109/IGARSS.2016.7729594},
+  KEYWORDS = {Time Series Classification ; MODIS ; Vegetation Index ; D-BoTSW},
+  PDF = {https://halshs.archives-ouvertes.fr/halshs-01343211/file/classification-modis-time.pdf},
+  HAL_ID = {halshs-01343211},
+  HAL_VERSION = {v1},
+}
+
+@article{salah:halshs-01138500,
+  TITLE = {{T-Patterns Revisited: Mining for Temporal Patterns in Sensor Data}},
+  AUTHOR = {Salah, Albert Ali and Pauwels, Eric and Tavenard, Romain and Gevers, Theo},
+  URL = {https://halshs.archives-ouvertes.fr/halshs-01138500},
+  JOURNAL = {{Sensors}},
+  PUBLISHER = {{MDPI}},
+  VOLUME = {10},
+  NUMBER = {8},
+  PAGES = {7496-7513},
+  YEAR = {2010},
+  DOI = {10.3390/s100807496},
+  KEYWORDS = {temporal pattern extraction ; MERL motion data ; Gaussian mixture model ; Lempel-Ziv ; T-patterns ; sensor networks},
+  PDF = {https://halshs.archives-ouvertes.fr/halshs-01138500/file/sensors-10-07496.pdf},
+  HAL_ID = {halshs-01138500},
+  HAL_VERSION = {v1},
+}
+
+@inproceedings{tavenard:halshs-01138512,
+  TITLE = {{Searching for Temporal Patterns in AmI Sensor Data}},
+  AUTHOR = {Tavenard, Romain and Salah, Albert Ali and Pauwels, Eric},
+  URL = {https://halshs.archives-ouvertes.fr/halshs-01138512},
+  BOOKTITLE = {{Constructing Ambient Intelligence}},
+  ADDRESS = {Darmstadt, Germany},
+  PAGES = {53-62},
+  YEAR = {2007},
+  MONTH = Nov,
+  DOI = {10.1007/978-3-540-85379-4\_7},
+  KEYWORDS = {Ambient Intelligence ; Data mining},
+  PDF = {https://halshs.archives-ouvertes.fr/halshs-01138512/file/ami_07_tavenard.pdf},
+  HAL_ID = {halshs-01138512},
+  HAL_VERSION = {v1},
+}
+
+@inproceedings{pauwels:halshs-01138508,
+  TITLE = {{Sensor Networks for Ambient Intelligence}},
+  AUTHOR = {Pauwels, Eric and Salah, Albert Ali and Tavenard, Romain},
+  URL = {https://halshs.archives-ouvertes.fr/halshs-01138508},
+  BOOKTITLE = {{IEEE Workshop on Multimedia Signal Processing}},
+  ADDRESS = {Chania, Greece},
+  YEAR = {2007},
+  MONTH = Oct,
+  DOI = {10.1109/MMSP.2007.4412806},
+  KEYWORDS = {Data mining ; Ambient Intelligence ; Sensors},
+  PDF = {https://halshs.archives-ouvertes.fr/halshs-01138508/file/mmsp_07_pauwels.pdf},
+  HAL_ID = {halshs-01138508},
+  HAL_VERSION = {v1},
+}
+
+@inproceedings{jegou:inria-00566883,
+  TITLE = {{Searching in one billion vectors: re-rank with source coding}},
+  AUTHOR = {J{\'e}gou, Herv{\'e} and Tavenard, Romain and Douze, Matthijs and Amsaleg, Laurent},
+  URL = {https://hal.inria.fr/inria-00566883},
+  BOOKTITLE = {{ICASSP 2011 - International Conference on Acoustics, Speech and Signal Processing}},
+  ADDRESS = {Prague, Czech Republic},
+  PUBLISHER = {{IEEE}},
+  PAGES = {861-864},
+  YEAR = {2011},
+  MONTH = May,
+  DOI = {10.1109/ICASSP.2011.5946540},
+  KEYWORDS = {approximate nearest neighbors ; large scale indexing ; source coding ; similarity search},
+  PDF = {https://hal.inria.fr/inria-00566883/file/paper.pdf},
+  HAL_ID = {inria-00566883},
+  HAL_VERSION = {v1},
+}
+
+@inproceedings{tavenard:inria-00576886,
+  TITLE = {{Balancing clusters to reduce response time variability in large scale image search}},
+  AUTHOR = {Tavenard, Romain and J{\'e}gou, Herv{\'e} and Amsaleg, Laurent},
+  URL = {https://hal.inria.fr/inria-00576886},
+  BOOKTITLE = {{International Workshop on Content-Based Multimedia Indexing (CBMI 2011)}},
+  ADDRESS = {Madrid, Spain},
+  YEAR = {2011},
+  MONTH = Jun,
+  PDF = {https://hal.inria.fr/inria-00576886/file/cbmi2011_preprint.pdf},
+  HAL_ID = {inria-00576886},
+  HAL_VERSION = {v2},
+}
+
+@article{tavenard:inria-00567877,
+  TITLE = {{Model-based similarity estimation of multidimensional temporal sequences}},
+  AUTHOR = {Tavenard, Romain and Amsaleg, Laurent and Gravier, Guillaume},
+  URL = {https://hal.inria.fr/inria-00567877},
+  JOURNAL = {{Annals of Telecommunications - annales des t{\'e}l{\'e}communications}},
+  PUBLISHER = {{Springer}},
+  VOLUME = {64},
+  NUMBER = {5},
+  PAGES = {381-390},
+  YEAR = {2009},
+  MONTH = Jun,
+  DOI = {10.1007/s12243-009-0091-4},
+  KEYWORDS = {Multidimensional feature sequences ; Support vector regression ; Temporal aspects ; Similarity estimation in a model space},
+  HAL_ID = {inria-00567877},
+  HAL_VERSION = {v1},
+}
+
+@article{tavenard:hal-00862176,
+  TITLE = {{Improving the Efficiency of Traditional DTW Accelerators}},
+  AUTHOR = {Tavenard, Romain and Amsaleg, Laurent},
+  URL = {https://hal.inria.fr/hal-00862176},
+  JOURNAL = {{Knowledge and Information Systems (KAIS)}},
+  PUBLISHER = {{Springer}},
+  VOLUME = {42},
+  NUMBER = {1},
+  PAGES = {215--243},
+  YEAR = {2015},
+  MONTH = Jan,
+  DOI = {10.1007/s10115-013-0698-7},
+  KEYWORDS = {Dynamic Time Warping ; Indexing Trees ; Upper Bounds ; Indexing ; Lower Bounds},
+  PDF = {https://hal.inria.fr/hal-00862176/file/hal-00862176.pdf},
+  HAL_ID = {hal-00862176},
+  HAL_VERSION = {v1},
 }

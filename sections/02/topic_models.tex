@@ -26,14 +26,14 @@ occurrences in each document, as shown in the Figure~\ref{fig:hdlsm}.
 \centering
 \includegraphics[width=.4\textwidth]{fig/hdlsm}
 \caption{In the HDLSM model, a document is seen as a mixture of motif
-occurrences. \label{fig:hdlsm}}
+occurrences and motifs are shared across documents. \label{fig:hdlsm}}
 \end{figure}
 
-The HDLSM model takes as input a set of quantized time series (aka temporal
-documents).
+The HDLSM model takes as input a set of quantized time series (\emph{a.k.a.}
+temporal documents).
 More specifically, a time series is represented as a contingency table that
 informs, for
-each pair $(w, t)$, whether word (or a quantized feature) $w$ was
+each pair $(w, t)$, whether word (or quantized feature) $w$ was
 present in the time series at time index $t$ (in fact, it can also account for
 the \emph{amount} of presence of word $w$ at time $t$).
 
@@ -101,7 +101,7 @@ The model we have proposed in this context differs from the one described above
 in several aspects:
 
 \begin{itemize}
-\item We are not in a supervised setting, we have no labelled data at our disposal
+\item The setting is unsupervised, we have no labelled data at our disposal
 and our goal will rather be to extract meaningful trajectory clusters;
 \item We are not looking for motifs to be localized in time series (with
 a possible overlap between motifs, as in the method described above) but rather
@@ -130,8 +130,8 @@ emerging from the observed data, considering trajectories that share similar
 movement modes.
 This issue can be restated from a machine learning point of view as a
 large-scale clustering task.
-This tasks involves the definition of clustering methods
-that can handle such complex data while being efficient on large databases,
+This task involves the definition of clustering methods
+that can handle such complex data while being efficient on large datasets,
 and that both cluster trajectories as a whole and detect common
 sub-trajectories.
 
@@ -177,7 +177,7 @@ trajectories and GPS observations (into movement modes), we adopt a pragmatic
 two step approach that takes advantage of the inherent properties of the OUP:
 
 \begin{enumerate}
-\item A first dual clustering is performed based on a simpler independent
+\item A first clustering is performed based on a simpler independent
 Gaussian Mixture Model, in order to estimate potential movement modes and
 trajectory clusters: it removes within mode autocorrelation in
 the inference, and therefore facilitates the computations, yet it does not rely
@@ -186,7 +186,8 @@ Here again, we use a Hierarchical Dirichlet Process as a model for this
 two-level clustering, hence allowing for infinite mixtures of both movement
 modes and trajectory clusters.
 The Gaussian hypothesis in this case is in line with our choice of the OUP as
-our velocity process, since the OUP stationary distribution is Gaussian.
+our velocity process, since the OUP stationary distribution is Gaussian
+(see Figure~\ref{fig:oup}).
 \item Among the estimated movement modes, only those meeting a temporal consistency
 constraint are kept.
 Parameters of these consistent movement modes are then estimated, and used to
@@ -199,7 +200,7 @@ is reached are kept to estimate movement modes.
 The resulting consistent movement mode concept allows one to (1) have a good
 estimation of OUP parameters within a movement mode (as a consistent sequence
 will often be related to a large amount of points) and (2) filter out
-"noise" movement modes gathering few observations in a temporally
+``noise'' movement modes gathering few observations in a temporally
 inconsistent manner.
 
 Parameter estimation for Step 1 described above is performed through stochastic
@@ -219,7 +220,7 @@ computations involved can easily be distributed.
 
 We have provided \href{https://github.com/rtavenar/ushant_ais}{a dataset} of
 several
-millions of observations in the AIS context.
+million observations in the AIS context.
 This dataset is used in~\cite{gloaguen2020} to validate our model qualitatively
 (through visual
 analysis of extracted movement modes and trajectory clusters) and compare it to

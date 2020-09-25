@@ -1,0 +1,38 @@
+My research activities lie around the analysis of time series.
+I have investigated various tasks (clustering, classification, indexing, \emph{etc.}) and part of the developed methods have been applied in the context of environmental data.
+
+\section*{Representations for Time Series}
+
+One of my major research interests is in the design of sensible representations for time series.
+In~\cite{malinowski:halshs-00912512}, we have introduced a novel quantized representation for time series data.
+At times, we have also relied on hand-crafted time series features~\cite{bailly:halshs-01184900,bailly:hal-01252726} for time series classification.
+More recently, we have turned our focus on the widely used shapelet transform for time series classification.
+One track we have followed in this regard consists in bridging the gap between shapelet mining and shapelet learning approaches~\cite{guilleme:hal-02513295,wang2019,guijorubio:hal-02371422}.
+In~\cite{leguennec:halshs-01357973} we have proposed some of the first data augmentation techniques for time series classification using convolutional neural networks.
+We have also investigated the specific task of early classification~\cite{tavenard:halshs-01339007} using end-to-end trainable models~\cite{ruwurm:hal-02174314}.
+Finally, we have investigated the use of temporal topic models in both supervised~\cite{tavenard:hal-00872048} and unsupervised~\cite{gloaguen2020} settings.
+
+\section*{Metrics for Time Series}
+
+We have introduced a time-sensitive kernel in~\cite{tavenard:halshs-01561461} that relies on match kernels for the comparison of time series.
+We have also proposed variants of the Dynamic Time Warping (DTW) algorithm that either discard pathological paths~\cite{zhang2017dynamic} or allow the comparison of series that do not necessarily lie in the same ambient space~\cite{vayer2020time}.
+Then, in~\cite{lods:hal-01565207}, we have attempted to bridge the gap between representations and metrics by learning a shapelet-based representation that approximates DTW.
+
+\section*{Machine Learning and Optimal Transport}
+
+I have recently turned my focus to other structured data such as graphs.
+In this context, we have designed a novel optimal transport distance that takes into account both structural information and features attached to nodes in the graphs~\cite{vayer:hal-02174316,vayer:hal-02174322}.
+This distance relies on Wasserstein and Gromov-Wasserstein distances.
+We have also shown a closed-form solution for the monodimensional Gromov-Wasserstein problem which has lead to the definition of a sliced variant for higher dimensions~\cite{vayer:hal-02174309}.
+
+\section*{Machine Learning for Environmental Data}
+
+We have so far mainly turned our focus on two main types of environmental data.
+First, we have studied chemistry data in streams using topic models~\cite{aubert:halshs-00906292} or DTW alignment strategies~\cite{dupas:halshs-01228397}.
+Second, we have dealt with remote sensing data (and more specifically satellite image time series) for tasks as diverse as land cover classification~\cite{bailly:halshs-01343211,ruwurm:hal-02343851}, domain adaptation~\cite{bailly:halshs-01515283}, or dimensionality reduction~\cite{damodaran:hal-01620604}.
+Also, some of my earlier works were focused on pattern mining in smart environments~\cite{tavenard:halshs-01138512,pauwels:halshs-01138508,salah:halshs-01138500}.
+
+\section*{Indexing}
+
+We have also tackled the task of indexing, with a focus on feature vector indexing by using a residual quantization strategy in~\cite{jegou:inria-00566883} or through the design of a balanced $k$-means clustering~\cite{tavenard:inria-00576886}.
+More specific methods dedicated to temporal data have also been investigated that rely on the use of elastic distances~\cite{carlinisperandio:hal-01841995,tavenard:hal-00862176} or on trained forecasting models~\cite{tavenard:inria-00567877}.

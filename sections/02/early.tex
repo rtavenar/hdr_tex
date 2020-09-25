@@ -6,7 +6,6 @@ as early as possible for an incoming time series.
 % Because of the specificity of this task, I will use in this section the
 % notation $\mathbf{x}_{\rightarrow t}$ to denote the time series $\mathbf{x}$
 % truncated after $t$ timestamps.
-
 I have worked on two methods for this task.
 The first one is a slight improvement
 over~\cite{dachraoui2015early} and the second one relies on a
@@ -89,6 +88,7 @@ Using Bayes' rule, Equation \eqref{eq:dachraoui} can be re-written
         + \alpha t
 \end{eqnarray}
 
+\noindent
 where $A_{t+\tau}(C_k)$ is the sum of off-diagonal elements in the (normalized)
 training time confusion matrix built from time series in cluster $k$ using
 classifier $m_{t+\tau}(\cdot)$.
@@ -164,15 +164,6 @@ and Sébastien Lefèvre during his stay.}
 We have hence proposed a representation learning framework that
 addresses these three limitations~\cite{ruwurm:hal-02174314}.
 
-In more detail, we rely on a feature extraction module (that can either be
-made of causal convolutions or recurrent submodules) to extract a fixed-sized
-representation $h_t$ from an incoming time series $\mathbf{x}_{\rightarrow t}$.
-An important point here is that this feature extractor should operate on time
-series whatever their length (and hence a different feature extractor need not
-to be learned for each time series length).
-Then, this feature is provided as input to two different heads, as shown in
-Figure~\ref{fig:early}.
-
 \begin{figure}[t]
 \centering
 \includegraphics[width=.3\textwidth]{fig/early_module_cropped}
@@ -180,6 +171,15 @@ Figure~\ref{fig:early}.
 Grey cells correspond to quantities that are
 computed from the model outputs. \label{fig:early}}
 \end{figure}
+
+In more detail, we rely on a feature extraction module (that can either be
+made of causal convolutions or recurrent submodules) to extract a fixed-sized
+representation $h_t$ from an incoming time series $\mathbf{x}_{\rightarrow t}$.
+An important point here is that this feature extractor should operate on time
+series whatever their length (and hence a different feature extractor need not
+to be learned for each time series length).
+Then, this feature is provided as input to two different heads, as shown in
+Figure~\ref{fig:early}:
 
 \begin{itemize}
 \item The first head (left) outputs a probability $p_\text{dec}$ of making a
@@ -195,7 +195,7 @@ a classification if the first head triggered it.
 Hence, provided that we have a differentiable early classification loss
 function, we are able to learn all parameters of this model end-to-end.
 Our last contribution in this context is the design of a loss function that
-does not lead to dumb optimal solutions (\emph{e.g.}, trigger all
+does not lead to useless optimal solutions (\emph{e.g.}, trigger all
 classifications at
 the first time stamp, whatever the data).
 We introduced the following loss function:

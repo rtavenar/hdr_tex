@@ -61,7 +61,9 @@ where $\beta$ is an additional scale parameter of the model.
 We have shown that the resulting model could be used as a feature extractor on top of
 which a $k$-means clustering could operate efficiently.
 We have also shown in~\cite{carlinisperandio:hal-01841995} that this
-representation is useful for time series indexing tasks.
+representation is useful for time series indexing tasks.%
+\footnote{This work is part of Ricardo Carlini Sperandio's PhD thesis.
+I am not involved in Ricardo's PhD supervision.}
 
 \subsection{Including Localization Information}
 
@@ -106,8 +108,8 @@ or
 \item Keep all information (match magnitude and localization).
 \end{itemize}
 
-To do so, we have introduced a modified Group-Lasso (called
-Semi-Sparse Group Lasso) loss that enforces sparsity only on some individual
+To do so, we have introduced a modified Sparse-Group-Lasso (called
+Semi-Sparse-Group-Lasso) loss that enforces sparsity only on some individual
 variables:
 
 \begin{equation}
@@ -136,6 +138,9 @@ regularizations.
 
 Figure~\ref{fig:ssgl} illustrates the benefit of our SSGL regularization scheme
 when groups of variables exist in the data and semi-sparse assumption holds.
+One can notice that SSGL slightly outperforms Sparse-Group-Lasso (SGL) in
+terms of both Mean Squared Error (MSE) and estimation of zero coefficients.
+
 
 \begin{figure}[t]
 \centering
@@ -150,9 +155,6 @@ the closer their bars are to the blue one (or to 0 when the blue bar is not
 visible), the better.
 \label{fig:ssgl}}
 \end{figure}
-
-and one can notice that SSGL slightly outperforms Sparse-Group Lasso (SGL) in
-terms of both Mean Squared Error (MSE) and estimation of zero coefficients.
 
 When applied to the specific case of random shapelets, we have shown that this
 lead to improved accuracy as soon as datasets are large enough for coefficients

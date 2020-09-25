@@ -1,9 +1,10 @@
 \subsection{DTW with Global Invariances}
 \label{sec:dtw_gi}
 
-In this work, we address the problem of comparing time series while taking
+We now turn our focus to the problem of comparing time series while taking
 into account both feature space transformation and temporal variability.
-The proposed framework combines a latent global transformation of the feature
+We have proposed a framework that combines a latent global transformation of
+the feature
 space with the widely used Dynamic Time Warping (DTW).
 This work is available as a preprint~\cite{vayer2020time}.%
 \footnote{\label{fn:titouan}This work is part of Titouan Vayer's PhD thesis.
@@ -29,12 +30,12 @@ More formally, we define Dynamic Time Warping with Global Invariances
 \begin{equation}
     \text{DTW-GI}(\mathbf{x}, \mathbf{x^\prime}) =
         \min_{f \in \mathcal{F}, \pi \in \mathcal{A}(\mathbf{x}, \mathbf{x^\prime})}
-            \sqrt{ \sum_{(i, j) \in \pi} d(x_i, f(x^\prime_j))^2 } \, ,
+            \sqrt{ \sum_{(i, j) \in \pi} d(x_i, f(x^\prime_j))^2 } \, .
     \label{eq:dtwgi}
 \end{equation}
 
-where $\mathcal{F}$ is a family of functions from $\mathbb{R}^{p^\prime}$ to
-$\mathbb{R}^{p}$.
+% where $\mathcal{F}$ is a family of functions from $\mathbb{R}^{p^\prime}$ to
+% $\mathbb{R}^{p}$.
 
 This similarity measure estimates both temporal alignment and feature space
 transformation between time series simultaneously, allowing the alignment of
@@ -75,8 +76,8 @@ which  nearest neighbors are replaced by matches resulting from DTW alignment.
 
 We also introduce soft counterparts following the definition of softDTW
 from~\cite{cuturi2017soft}.
-In this case, the optimization process consists of a gradient descent, and a
-wider variety of
+In this case, we optimize on the resulting loss using projected gradient
+descent, and a wider variety of
 feature space transformation families can be considered.
 
 \begin{figure}[t]
@@ -93,7 +94,8 @@ feature space transformation families can be considered.
 To illustrate the interest of our approach,
 Figure~\ref{fig:dtw_gi_bary} presents examples of barycenters obtained with
 various DTW-based barycenter computation methods.
-We validate the utility of these similarity measures on real world
+In~\cite{vayer2020time}, we validate the utility of these similarity measures
+on real world
 datasets on the tasks of human motion prediction (where motion is captured under
 different points of view) and cover song identification (where song similarity
 is defined up to a key transposition).

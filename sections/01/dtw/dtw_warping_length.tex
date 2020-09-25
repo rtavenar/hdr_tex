@@ -15,7 +15,7 @@ consists in forcing paths to stay close to the diagonal through the use of
 Sakoe-Chiba band or Itakura parallelogram constraints.
 A limitation of these global constraints is that they completely
 discard some regions of the alignment matrix \emph{a priori}
-(\emph{i.e.} regardless of the involved data).
+(\emph{i.e.} regardless of the data involved).
 
 To alleviate this limitation, we propose Limited warping path length DTW (LDTW)
 that adds a path length constraint to the DTW
@@ -31,7 +31,7 @@ alignment scores for all admissible alignment path lengths.
 This gives the general LDTW algorithm presented in Algorithm~\ref{algo:ldtw}.
 
 \begin{algorithm}[t]
- \caption{LDTW algorithm. For the sake of simplicity, out-of-bounds accesses to $C$ are assumed to return $\infty$.}
+ \caption{LDTW algorithm. For the sake of simplicity, out-of-bound accesses to $C$ are assumed to return $\infty$.}
  \label{algo:ldtw}
  \KwData{$(\mathbf{x}, \mathbf{x}^\prime)$ : a pair of time series, $K_\text{max}$: an upper bound on the path length}
  \For{$i$ = 0..$n-1$}{
@@ -42,9 +42,9 @@ This gives the general LDTW algorithm presented in Algorithm~\ref{algo:ldtw}.
      \texttt{// The core difference with DTW is the following loop:} \\
      \For{$l \in \mathrm{admissible\_lengths}(i, j, K_\text{max})$}{
        \eIf{$i$ == 0 \textup{\textbf{and}} $j$ == 0}{
-         $C_{i, j, l} = dist$
+         $C_{i, j, l} =$ dist
        }{
-         $C_{i, j, l} = dist + \min(C_{i-1, j, l-1}, C_{i, j-1, l-1}, C_{i-1, j-1, l-1})$
+         $C_{i, j, l} =$ dist $+ \min(C_{i-1, j, l-1}, C_{i, j-1, l-1}, C_{i-1, j-1, l-1})$
        }
  	  }
     }
@@ -61,9 +61,8 @@ Overall, we have a $O(mn^2 + nm^2)$ complexity for this exact algorithm.
 
 \subsubsection{Empirical Observations}
 
-First, one can see in Figure~\ref{fig:ldtw} that the resulting alignments
-effectively limits the number of singularities in the obtained alignments as
-compared to DTW.
+First, one can see in Figure~\ref{fig:ldtw} that the resulting alignment
+has indeed fewer singularities than the one obtained from DTW.
 
 \begin{figure}[t]
     \begin{subfigure}[b]{\textwidth}

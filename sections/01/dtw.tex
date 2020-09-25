@@ -41,8 +41,8 @@ paths, \emph{i.e.} the set of paths $\pi$ such that:
 \item for all $k > 0$ , $\pi_k = (i_k, j_k)$ is related to
   $\pi_{k-1} = (i_{k-1}, j_{k-1})$ as follows:
   \begin{itemize}
-  \item $i_{k-1} \leq i_k \leq i_{k-1} + 1$
-  \item $j_{k-1} \leq j_k \leq j_{k-1} + 1$
+  \item[$\ast$] $i_{k-1} \leq i_k \leq i_{k-1} + 1$
+  \item[$\ast$] $j_{k-1} \leq j_k \leq j_{k-1} + 1$
 \end{itemize}
 \end{itemize}
 
@@ -67,16 +67,16 @@ problem, assuming computation of $d(\cdot,\cdot)$ is $O(1)$
 (see Algorithm~\ref{algo:dtw}).
 
 \begin{algorithm}[t]
- \caption{DTW algorithm. For the sake of simplicity, out-of-bounds accesses to $C$ are assumed to return $\infty$.}
+ \caption{DTW algorithm. For the sake of simplicity, out-of-bound accesses to $C$ are assumed to return $\infty$.}
  \label{algo:dtw}
  \KwData{$(\mathbf{x}, \mathbf{x}^\prime)$ : a pair of time series}
  \For{$i$ = 0..$n-1$}{
    \For{$j$ = 0..$m-1$}{
      dist = $d(x_i, x^\prime_j)^2$ \\
        \eIf{$i$ == 0 \textup{\textbf{and}} $j$ == 0}{
-         $C_{i, j} = dist$
+         $C_{i, j} =$ dist
        }{
-         $C_{i, j} = dist + \min(C_{i-1, j}, C_{i, j-1}, C_{i-1, j-1})$
+         $C_{i, j} =$ dist $+ \min(C_{i-1, j}, C_{i, j-1}, C_{i-1, j-1})$
        }
     }
   }
